@@ -127,6 +127,15 @@ with mp_hands.Hands(
                                     cv2.FONT_HERSHEY_SIMPLEX, 
                                     3.0, (0, 0, 255), 6)
                         
+                     # U - Índice y medio extendidos y juntos, el resto doblado.
+                    elif index_finger_pip[1] - index_finger_tip[1] > 0 and middle_finger_pip[1] - middle_finger_tip[1] > 0 and \
+                         abs(index_finger_tip[0] - middle_finger_tip[0]) < 30 and \
+                         pinky_pip[1] - pinky_tip[1] < 0 and ring_finger_pip[1] - ring_finger_tip[1] < 0 and \
+                         thumb_tip[1] - thumb_pip[1] < 0: # Dedo anular y meñique doblados, pulgar pegado
+                        cv2.putText(image, 'U', (700, 150), 
+                                    cv2.FONT_HERSHEY_SIMPLEX, 
+                                    3.0, (0, 0, 255), 6)
+                        
         cv2.imshow('MediaPipe Hands - Vocales (ASL)', image)
         if cv2.waitKey(5) & 0xFF == 27:
             break
