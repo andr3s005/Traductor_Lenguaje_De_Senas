@@ -111,6 +111,14 @@ with mp_hands.Hands(
                                     cv2.FONT_HERSHEY_SIMPLEX, 
                                     3.0, (0, 0, 255), 6)
                         
+                        # I - Meñique extendido, el resto doblado.
+                    elif distancia_euclidiana(pinky_tip, wrist) > distancia_euclidiana(ring_finger_tip, wrist) and \
+                         pinky_pip[1] - pinky_tip[1] > 0 and \
+                         distancia_euclidiana(thumb_tip, index_finger_tip) > 100: # Pulgar separado
+                        cv2.putText(image, 'I', (700, 150), 
+                                    cv2.FONT_HERSHEY_SIMPLEX, 
+                                    3.0, (0, 0, 255), 6)
+                        
         cv2.imshow('MediaPipe Hands - Vocales (ASL)', image)
         if cv2.waitKey(5) & 0xFF == 27:
             break
