@@ -118,6 +118,14 @@ with mp_hands.Hands(
                         cv2.putText(image, 'I', (700, 150), 
                                     cv2.FONT_HERSHEY_SIMPLEX, 
                                     3.0, (0, 0, 255), 6)
+
+                    # O - Dedos curvados y unidos formando un círculo.
+                    elif distancia_euclidiana(thumb_tip, index_finger_tip) < 55 and \
+                         distancia_euclidiana(thumb_tip, middle_finger_tip) < 55 and \
+                         distancia_euclidiana(index_finger_pip, ring_finger_mcp) > 80: # Abre la mano ligeramente y une las puntas
+                        cv2.putText(image, 'O', (700, 150), 
+                                    cv2.FONT_HERSHEY_SIMPLEX, 
+                                    3.0, (0, 0, 255), 6)
                         
         cv2.imshow('MediaPipe Hands - Vocales (ASL)', image)
         if cv2.waitKey(5) & 0xFF == 27:
