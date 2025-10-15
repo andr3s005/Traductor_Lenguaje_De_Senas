@@ -93,18 +93,24 @@ with mp_hands.Hands(
                     ring_finger_mcp = (int(hand_landmarks.landmark[13].x * image_width),
                                       int(hand_landmarks.landmark[13].y * image_height))
 
-                    # ------------------------------------------------------------------
-                    # Lógica para las VOCALES (A, E, I, O, U)
-                    # ------------------------------------------------------------------
-                    
-                    # A - Puño cerrado con el pulgar a un lado.
+
+                        # A - Puño cerrado con el pulgar a un lado.
                     if abs(thumb_tip[1] - index_finger_pip[1]) < 45 \
                         and abs(thumb_tip[1] - middle_finger_pip[1]) < 30 and abs(thumb_tip[1] - ring_finger_pip[1]) < 30 \
                         and abs(thumb_tip[1] - pinky_pip[1]) < 30:
                         cv2.putText(image, 'A', (700, 150), 
                                     cv2.FONT_HERSHEY_SIMPLEX, 
                                     3.0, (0, 0, 255), 6)
-
+                        
+                         # E - Puño cerrado con las puntas de los dedos tocando la palma.
+                    elif index_finger_pip[1] - index_finger_tip[1] < 0 and pinky_pip[1] - pinky_tip[1] < 0 and \
+                        middle_finger_pip[1] - middle_finger_tip[1] < 0 and ring_finger_pip[1] - ring_finger_tip[1] < 0 \
+                        and abs(index_finger_tip[1] - thumb_tip[1]) < 100:
+                        # Se ha mantenido la lógica original para 'E'.
+                        cv2.putText(image, 'E', (700, 150), 
+                                    cv2.FONT_HERSHEY_SIMPLEX, 
+                                    3.0, (0, 0, 255), 6)
+                        
         cv2.imshow('MediaPipe Hands - Vocales (ASL)', image)
         if cv2.waitKey(5) & 0xFF == 27:
             break
